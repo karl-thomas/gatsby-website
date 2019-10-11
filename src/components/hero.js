@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import BackgroundImage from 'gatsby-background-image';
 import { Link, graphql, useStaticQuery } from 'gatsby';
+import Canvas from './canvas';
 
-const ImageBackground = styled(BackgroundImage)`
-  background-image: url('/images/janko-ferlic-bear.jpg');
+const ImageBackground = styled.section`
+  ${'' /* background-image: url('/images/janko-ferlic-bear.jpg'); */}
   background-position: top 20% center;
   background-size: cover;
   height: 40vh;
@@ -14,8 +14,11 @@ const ImageBackground = styled(BackgroundImage)`
   }
 `;
 
+const BackgroundCanvas = styled(Canvas)`
+`;
+
 const TextBox = styled('div')`
-  background-image: linear-gradient(to top, #ddbbffdd 2rem, #ddbbff00);
+  background-image: linear-gradient(to top, #ffffff 2rem, #ddbbff00);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -45,8 +48,8 @@ const Hero = () => {
     query {
       image: file(relativePath: { eq: "janko-ferlic-bear.jpg"}) {
         sharp: childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid_withWebp
+          fluid(traceSVG: { color: "#ddbbff66", background: "#fff" }) {
+            ...GatsbyImageSharpFluid_tracedSVG
           }
         }
       }
@@ -54,7 +57,11 @@ const Hero = () => {
   `);
 
   return (
-    <ImageBackground Tag="section" fluid={image.sharp.fluid} fadeIn="soft">
+    <ImageBackground
+      Tag="section"
+      // fluid={image.sharp.fluid}
+      fadeIn="soft">
+      <BackgroundCanvas></BackgroundCanvas>
       <TextBox>
         <h1>A Pile of Bears &hearts;</h1>
         <p>
