@@ -14,6 +14,7 @@ Modals are best used to perform a selection on a variable set of data that may t
 Creating a modal. 
 Like in ionic 3, you need to import the ModalController into your parent modal that you will be controlling the modal and instantiate a controller through the constructors. 
 
+```ts
 import { ModalController } from '@ionic/angular';
 import { Component } from '@angular/core';
  
@@ -26,12 +27,14 @@ export class Modal {
   // ../
   constructor(public modalCtrl: ModalController) { }
 }
+```
 
 
 To make a modal appear you must first create it then present it. In ionic 4 ModalController#create now returns promise that resolves with a modal object that you can then work with to present or do other things we'll talk about later.
 
 When creating a modal, the only required thing for you to give the function is a component to instantiate within the modal wrapper.
 
+```ts
 // ..
 export class ParentComponent { 
     constructor(public modalCtrl: ModalController) { }
@@ -49,6 +52,7 @@ export class ParentComponent {
         return modal.present();
     }  
 }
+```
 
 
 And above is all the code you need to display a modal! you know, besides the DetailModalComponent, you need a component to display still. 
@@ -59,6 +63,7 @@ All of the properties and selectors needed to style the so to say "content" of t
 
 Styling the actual modal that contains the component with the DOM needs to be handled by passing giving a class to the create function when creating the modal with the component, as so: 
 
+```ts
 export class ParentComponent {
     constructor(public modalCtrl: ModalController) { }
      
@@ -69,6 +74,7 @@ export class ParentComponent {
         })
     }
 }
+```
 
 
 To actually apply styles using that .custom-modal selector, you should go and put that class selector in your `global.scss` file.  Inside of this selector you can define some CSS variables to change the looks of our modal, outside of these variables you can fiddle around with all the normal CSS you are accustomed to. Here are those variables.
@@ -84,23 +90,29 @@ To actually apply styles using that .custom-modal selector, you should go and pu
 --max-width	Maximum width of the modal
 --min-height	Minimum height of the modal
 --min-width	Minimum width of the modal
---width	
-Width of the modal
+--width	Width of the modal
 
 So if you wanted to change the height and width of the modal to only take up 40% of the screen you could put this in your selector
 
+```css
 .custom-modal {
     --width: 40%;
     --height: 40%;
 }
-Animating a Modal
+```
+
+## Animating a Modal
 Ionic animates modals for you but when creating a modal you can set two properties enterAnimation and leaveAnimation to control how the modal behaves entering or exiting the page. if you take a look here then you can see the animations that the ionic team has made for the modals already. The type definition given to these items is called AnimationBuilder and its not the same as the animation builder from angular, this animation builder is something specific to ionic looks like this.  
 
+```ts
 export declare type AnimationBuilder = (AnimationConstructor: Animation, baseEl: any, opts?: any) => Promise<Animation>;
+```
+
 It's just a function with some special parameters and returns a promise. The Animation type that the animationConstructor argument and what the promise is resolving is another piece of Ionic code, it is responsible for creating/managing the animation that will be run. you can find its type def here and the source code here. 
 
 Anyway, let's create a custom animation to feed our modal when it enters. Instead of coming in from the bottom i want it to animate from the top, so will take the source code for the md-enter animation and make a simple change to the starting position of one of our elements
 
+```ts
 import { Animation } from '@ionic/core';
  
 /**
@@ -129,17 +141,18 @@ export function enterFromTopAnimation(AnimationC: Animation, baseEl: HTMLElement
     .add(backdropAnimation)
     .add(wrapperAnimation));
 }
-
+```
 
 So with the animation, all we changed from the default one was we positioned the element -100vh above the page, so that it flies in from the top.
 
 To use this animation all you need to do is assign the function to the enterAnimation in the ModalController#create function. 
 
+```ts
 const modal = await this.modalCtrl.create({
     component: DetailPageModal,
     enterAnimation: enterFromTopAnimation,
 });
-
+```
 
 
 
@@ -151,8 +164,7 @@ Getting Data Into a Modal
 
 Say you want to build a really cool custom interface for a user. To me, a modal is the best way to go about doing that given their promise based structure. They are very flexible as a way to throw content at the page, and to manage data. If you want to start giving data to a modal then you need to pass a componentProps option while creating. 
 
-
-
+```ts
 export class ParentComponent {
     constructor(public modalCtrl: ModalController) { }
      
@@ -163,11 +175,12 @@ export class ParentComponent {
         })
     }
 }
+```
 
 
 Then in order to get "data!" from within your modal, or, the DetailComponent you are opening, you'll need to define it as an input. There are two good ways to do that. 
 
-
+```ts
 import { NavParams } from '@ionic/angular";
 import { Component, Input } from '@angular/core';
  
@@ -182,7 +195,7 @@ export class DetailComponent {
         this.paramsStuff = this.navParams.get('stuff');
     }  
 }
-
+```
 
 There was a case of the navParams causing the data to be mutable between the parent and modal component. Meaning that data passed to the modal, and then was altered by the modal, without the modal returning the data when it closed. I have tried to recreate this and not been able to, but do be aware of this incase you notice inconsistencies in your data.
 
@@ -191,8 +204,7 @@ Getting data from the modal
 
 After you have done whatever you need to do with the modal and its time to take the result of the users action and preserve it in the app, send it off to an API, or do something else with it, the Modal needs to send its data to the parent, and the parent needs to intercept it. In order to pass data from the modal, you need to give it a parameter when calling ModalController#dismiss
 
-
-
+```ts
 export class DetailComponent {
     constructor(public modalCtrl: ModalController) { }
  
@@ -202,12 +214,14 @@ export class DetailComponent {
         this.modalCtrl.dismiss({ name: "Billy" });
     }
 }
+```
 
 
 you can also do this in the template. 
 
 In order to use that data transmitted to dismiss, you need to capture it in the using Modal#OnDidDismiss in the parent component 
 
+```ts
 export class ParentComponent { 
     constructor(public modalCtrl: ModalController) { }
      
@@ -219,7 +233,8 @@ export class ParentComponent {
         const { data } = await modal.onDidDismiss();
     }  
 }
+```
 
 
-Data is a property of the OverlayEventDetail object being returns from modal.onDidDismiss(). It is what contains the { name: "Billy" } object.
+Data is a property of the OverlayEventDetail object being returns from `modal.onDidDismiss()`. It is what contains the `{ name: "Billy" }` object.
 
