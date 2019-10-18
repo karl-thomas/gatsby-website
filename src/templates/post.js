@@ -1,9 +1,9 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { css } from '@emotion/core';
-import Layout from '../components/layout';
-import ReadLink from '../components/read-link';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
+import Layout from '../components/Layout';
+import ReadLink from '../components/ReadLink';
 
 export const query = graphql`
   query($slug: String!) {

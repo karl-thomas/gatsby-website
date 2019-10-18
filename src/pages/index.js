@@ -1,9 +1,9 @@
 import React from 'react';
-import Layout from '../components/layout';
-import Insta from '../components/insta';
+import Layout from '../components/Layout';
+import Insta from '../components/Insta';
 import usePosts from '../hooks/use-posts';
-import PostPreview from '../components/post-preview';
-import Hero from '../components/hero';
+import PostPreview from '../components/PostPreview';
+import Hero from '../components/Hero';
 
 export default () => {
   const posts = usePosts();

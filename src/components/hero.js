@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Link, graphql, useStaticQuery } from 'gatsby';
-import Canvas from './canvas';
+import Canvas from './Canvas';
 
 const ImageBackground = styled.section`
   ${'' /* background-image: url('/images/janko-ferlic-bear.jpg'); */}
