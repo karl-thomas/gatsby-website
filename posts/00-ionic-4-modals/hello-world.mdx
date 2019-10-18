@@ -1,40 +1,31 @@
 ---
-title: first post
-slug: dont-look
+title: Working with Ionic 4 Modals
+slug: ionic-4-modals
 author: Karl Thomas
 image: ./images/stefan-steinbauer-lib.jpg
 ---
 
 Ionic 4 has introduced some changes to both how modals are displayed and how to work with the data you can pass to and from them, and the purpose of this guide is to cover as many modal use cases as possible
 
-When to use a Modal.
+## When to use a Modal.
+
 Modals are extremely helpful constructs provided by Ionic. They can be implemented in many ways to make very nice looking and feeling interfaces for users when the user needs to preform an action specific to your app. 
 Modals are best used to perform a selection on a variable set of data that may tend to have many items, display information that was hidden or otherwise obscured from the user initially, or to have the user preform a complex series of actions to create, edit, share, or remove data from the application. Things that are as simple as a yes/no question, or getting a short, one line response from the user should be displayed as alerts. For shorter lists of data, two to fifteen-ish items (pretty much as long as it still looks good as one of the following options), then use the select methods ion-select provides. Which are Action sheets, the select modal, or a popover.
 
-Creating a modal. 
+## Creating a modal. 
+
 Like in ionic 3, you need to import the ModalController into your parent modal that you will be controlling the modal and instantiate a controller through the constructors. 
 
-```ts
-import { ModalController } from '@ionic/angular';
-import { Component } from '@angular/core';
- 
-@Component({
-  selector: '...',
-  templateUrl: '..',
-  styleUrls: ['...'],
-})
-export class Modal {
-  // ../
-  constructor(public modalCtrl: ModalController) { }
-}
-```
 
+```javascript
+var hey = 'nice';
+```
 
 To make a modal appear you must first create it then present it. In ionic 4 ModalController#create now returns promise that resolves with a modal object that you can then work with to present or do other things we'll talk about later.
 
 When creating a modal, the only required thing for you to give the function is a component to instantiate within the modal wrapper.
 
-```ts
+```javascript
 // ..
 export class ParentComponent { 
     constructor(public modalCtrl: ModalController) { }
@@ -58,12 +49,12 @@ export class ParentComponent {
 And above is all the code you need to display a modal! you know, besides the DetailModalComponent, you need a component to display still. 
 
 
-Styling a modal. 
+## Styling a modal. 
 All of the properties and selectors needed to style the so to say "content" of the modal, or the component that you pass it, should be provided in that components stylesheet. So if you are creating a DetailComponent, and need to style a div in that component, throw that selector in the stylesheet.
 
 Styling the actual modal that contains the component with the DOM needs to be handled by passing giving a class to the create function when creating the modal with the component, as so: 
 
-```ts
+```javascript
 export class ParentComponent {
     constructor(public modalCtrl: ModalController) { }
      
@@ -95,16 +86,16 @@ To actually apply styles using that .custom-modal selector, you should go and pu
 So if you wanted to change the height and width of the modal to only take up 40% of the screen you could put this in your selector
 
 ```css
-.custom-modal {
-    --width: 40%;
-    --height: 40%;
-}
+    .custom-modal {
+        --width: 40%;
+        --height: 40%;
+    }
 ```
 
 ## Animating a Modal
 Ionic animates modals for you but when creating a modal you can set two properties enterAnimation and leaveAnimation to control how the modal behaves entering or exiting the page. if you take a look here then you can see the animations that the ionic team has made for the modals already. The type definition given to these items is called AnimationBuilder and its not the same as the animation builder from angular, this animation builder is something specific to ionic looks like this.  
 
-```ts
+```javascript
 export declare type AnimationBuilder = (AnimationConstructor: Animation, baseEl: any, opts?: any) => Promise<Animation>;
 ```
 
@@ -112,7 +103,7 @@ It's just a function with some special parameters and returns a promise. The Ani
 
 Anyway, let's create a custom animation to feed our modal when it enters. Instead of coming in from the bottom i want it to animate from the top, so will take the source code for the md-enter animation and make a simple change to the starting position of one of our elements
 
-```ts
+```javascript
 import { Animation } from '@ionic/core';
  
 /**
@@ -158,8 +149,9 @@ const modal = await this.modalCtrl.create({
 
 You can also change this globally by inserting a property into the IonicModule.forRoot function in the app.module.ts file. like so. 
 
+## Data Control in Modals
 
-Getting Data Into a Modal
+### Getting Data Into a Modal
 
 
 Say you want to build a really cool custom interface for a user. To me, a modal is the best way to go about doing that given their promise based structure. They are very flexible as a way to throw content at the page, and to manage data. If you want to start giving data to a modal then you need to pass a componentProps option while creating. 
@@ -200,7 +192,7 @@ export class DetailComponent {
 There was a case of the navParams causing the data to be mutable between the parent and modal component. Meaning that data passed to the modal, and then was altered by the modal, without the modal returning the data when it closed. I have tried to recreate this and not been able to, but do be aware of this incase you notice inconsistencies in your data.
 
 
-Getting data from the modal
+### Getting data from the modal
 
 After you have done whatever you need to do with the modal and its time to take the result of the users action and preserve it in the app, send it off to an API, or do something else with it, the Modal needs to send its data to the parent, and the parent needs to intercept it. In order to pass data from the modal, you need to give it a parameter when calling ModalController#dismiss
 
