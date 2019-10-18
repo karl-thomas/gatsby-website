@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: 'Starting Blog',
-    description: 'a nice blog to start with',
+    title: 'A Pile of bears',
+    description: 'Karl Thomas\' online precense',
   },
   plugins: [
     'gatsby-plugin-emotion',
