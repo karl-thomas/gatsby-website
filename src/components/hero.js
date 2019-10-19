@@ -4,9 +4,6 @@ import { Link, graphql, useStaticQuery } from 'gatsby';
 import Canvas from './Canvas';
 
 const ImageBackground = styled.section`
-  ${'' /* background-image: url('/images/janko-ferlic-bear.jpg'); */}
-  background-position: top 20% center;
-  background-size: cover;
   height: 40vh;
 
   + * {
@@ -18,7 +15,7 @@ const BackgroundCanvas = styled(Canvas)`
 `;
 
 const TextBox = styled('div')`
-  background-image: linear-gradient(to top, #ffffff 2rem, #ddbbff00);
+  background: linear-gradient(to top, #ffffff 1rem, #ddbbff00 7rem, transparent 1rem);
   display: flex;
   flex-direction: column;
   height: 100%;
