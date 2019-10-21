@@ -2,16 +2,17 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import { Link } from 'gatsby';
+import { Router } from '@reach/router';
+import { globalHistory } from "@reach/router"
 
 const NavLink = styled(Link)`
-  color: var(--color-light);
+  color: var(--color-dark);
   font-size: 1rem;
   font-weight: ${props => props.fontWeight || 'normal'};
   line-height: 1;
   margin-top: 0 0.5rem 0 0;
   padding: 0.25rem;
   text-decoration: none;
-  text-shadow: 1px 1px 1px #22222266;
 
   &.current-page {
     border-bottom: 1px solid #222;
@@ -32,16 +33,13 @@ const MainHeader = styled.header`
 `
 
 const Header = () => (
-  <MainHeader
-    css={css`
-      
-    `}
-    >
-    <NavLink to="/" fontWeight="bold">
-      Starter Blohg
+  <MainHeader>
+    <NavLink to="/" fontWeight="bold" hidden={ globalHistory.location.pathname === '/' }>
+      A Pile of Bears
     </NavLink>
+  
 
-    <nav css={css` margin-top: 0; `}>
+    <nav css={css` margin-top: 0; align-self: flex-end;`}>
       <NavLink to="/" activeClassName="current-page">
         Home
       </NavLink>

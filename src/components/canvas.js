@@ -12,7 +12,7 @@ const Canvas = () => {
     // Padding around edges
     const margin = width * marginConst;
     const palette = random.pick([
-      ['#84BC92', '#442F5E', '#EABA8A', '#191011', '#FAF9FC']
+      ['#84BC92', '#623CEA', '#EABA8A', '#191011', '#FAF9FC']
     ]);
 
     const canvasContainer = document.getElementById('canvas-container');
@@ -27,8 +27,8 @@ const Canvas = () => {
 
     // Create a grid of points (in pixel space) within the margin bounds
     const createGrid = () => {
-      const xCount = 5;
-      const yCount = 5;
+      const xCount = 4;
+      const yCount = 4;
       const points = [];
       for (let x = 0; x < xCount; x++) {
         for (let y = 0; y < yCount; y++) {
