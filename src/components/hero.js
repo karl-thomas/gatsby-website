@@ -5,6 +5,7 @@ import Canvas from './Canvas';
 
 const ImageBackground = styled.section`
   height: 40vh;
+  background: linear-gradient(to top, #ffffff 1rem, transparent);
 
   + * {
     margin-top: 0;
@@ -15,7 +16,7 @@ const BackgroundCanvas = styled(Canvas)`
 `;
 
 const TextBox = styled('div')`
-  background: linear-gradient(to top, #ffffff 1rem, #ddbbff00 7rem, transparent 1rem);
+  background: linear-gradient(to top, #ffffff 1rem, transparent);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -54,16 +55,8 @@ const Hero = () => {
   `);
 
   return (
-    <ImageBackground
-      Tag="section"
-      fadeIn="soft">
+    <ImageBackground Tag="section">
       <BackgroundCanvas></BackgroundCanvas>
-      <TextBox>
-        <h1>A Pile of Bears &hearts;</h1>
-        <p>
-          hello worl <Link to="/about/">Learn about me &rarr;</Link>
-        </p>
-      </TextBox>
     </ImageBackground>
   )
 }
