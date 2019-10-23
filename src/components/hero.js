@@ -5,7 +5,7 @@ import Canvas from './Canvas';
 
 const ImageBackground = styled.section`
   height: 40vh;
-  background: linear-gradient(to top, #ffffff 1rem, transparent);
+  
 
   + * {
     margin-top: 0;
