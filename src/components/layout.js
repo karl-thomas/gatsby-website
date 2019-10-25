@@ -5,49 +5,24 @@ import Helmet from 'react-helmet';
 import useSiteMetadata from '../hooks/use-site-metadata';
 import '../styles/global.css';
 import Hero from './Hero';
-import {
-  TransitionGroup,
-  Transition as ReactTransition,
-} from 'react-transition-group';
 import { Router } from '@reach/router';
+import { MDXProvider } from '@mdx-js/react';
+import { preToCodeBlock } from 'mdx-utils';
+import Code from './Code';
 
-const timeout = 300;
-const getTransitionStyles = {
-  entering: {
-    position: `absolute`,
-    opacity: 0,
+// overwrite what components will render in the MDXRenderer
+const components = {
+  pre: preProps => {
+    const props = preToCodeBlock(preProps);
+    // if there's a codeString and some props, we passed the test
+    if (props) {
+      return <Code {...props} />;
+    }
+    // it's possible to have a pre without a code in it
+    return <pre {...preProps} />;
   },
-  entered: {
-    transition: `opacity ${timeout}ms ease-in`,
-    opacity: 1,
-  },
-  exiting: {
-    transition: `opacity ${timeout}ms ease-out`,
-    opacity: 0,
-  },
+  wrapper: ({ children }) => <>{children}</>,
 };
-
-const Transition = ({ location, children }) => (
-  <TransitionGroup>
-    <ReactTransition
-      key={location.pathname}
-      timeout={{
-        enter: timeout,
-        exit: timeout,
-      }}
-    >
-      {status => (
-        <div
-          style={{
-            ...getTransitionStyles[status],
-          }}
-        >
-          {children}
-        </div>
-      )}
-    </ReactTransition>
-  </TransitionGroup>
-);
 
 const Layout = ({ children, location }) => {
   const { title, description } = useSiteMetadata();
@@ -63,10 +38,12 @@ const Layout = ({ children, location }) => {
         <title>{title}</title>
         <meta name="description" content={description}></meta>
       </Helmet>
+
       <Router>
         <Hero path="/"></Hero>
       </Router>
       <Header />
+
       <main
         css={css`
           margin: 2rem auto 4rem;
@@ -74,7 +51,7 @@ const Layout = ({ children, location }) => {
           width: 550px;
         `}
       >
-        <Transition location={location}>{children}</Transition>
+        <MDXProvider components={components}>{children}</MDXProvider>
       </main>
     </>
   );
