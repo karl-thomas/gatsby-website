@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: 'A Pile of bears',
-    description: 'Karl Thomas\' online precense',
+    description: "Karl Thomas' online precense",
   },
   plugins: [
     'gatsby-plugin-emotion',
@@ -9,11 +9,14 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve('./src/components/layout'),
+      },
+    },
+    {
       resolve: 'gatsby-plugin-mdx',
       options: {
-        defaultLayouts: {
-          default: require.resolve('./src/components/layout'),
-        },
         gatsbyRemarkPlugins: [{ resolve: 'gatsby-remark-images' }],
         plugins: [{ resolve: 'gatsby-remark-images' }],
       },

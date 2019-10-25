@@ -4,7 +4,7 @@ const random = require('canvas-sketch-util/random');
 const { lerp } = require('canvas-sketch-util/math');
 
 const Canvas = () => {
-  const marginConst = 0.00
+  const marginConst = 0.0;
   const width = window.innerWidth;
   const height = window.innerHeight * 0.4;
 
@@ -12,17 +12,23 @@ const Canvas = () => {
     // Padding around edges
     const margin = width * marginConst;
     const palette = random.pick([
-      ['#84BC92', '#623CEA', '#EABA8A', '#191011', '#FAF9FC']
+      ['#84BC92', '#623CEA', '#EABA8A', '#191011', '#FAF9FC'],
     ]);
 
     const canvasContainer = document.getElementById('canvas-container');
-    const canvas = document.createElement('canvas');
-    canvas.setAttribute('width', width);
-    canvas.setAttribute('height', height);
-    canvas.setAttribute('id', 'canvas');
+    let canvas = canvasContainer.querySelector('canvas');
+
+    // refactor to create canvas function
+    if (!canvas) {
+      canvas = document.createElement('canvas');
+      canvas.setAttribute('width', width);
+      canvas.setAttribute('height', height);
+      canvas.setAttribute('id', 'canvas');
+    } else canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+
     canvasContainer.appendChild(canvas);
 
-    const context = canvas.getContext("2d");
+    const context = canvas.getContext('2d');
     const background = 'white';
 
     // Create a grid of points (in pixel space) within the margin bounds
@@ -72,15 +78,10 @@ const Canvas = () => {
         // up to the first point,
         // through the second point,
         // and then back down to the bottom of the page
-        path: [
-          [a[0], height - margin],
-          a,
-          b,
-          [b[0], height - margin]
-        ],
+        path: [[a[0], height - margin], a, b, [b[0], height - margin]],
         // The average Y position of both grid points
         // This will be used for layering
-        y: (a[1] + b[1]) / 2
+        y: (a[1] + b[1]) / 2,
       });
     }
 
@@ -92,32 +93,39 @@ const Canvas = () => {
       context.globalAlpha = 1;
       context.fillStyle = background;
       context.fillRect(0, 0, width, height);
-      
+
       shapes.forEach(({ lineWidth, path, color }) => {
-          context.beginPath();
-          let [lastX, lastY] = random.pick(path);
-          const randomNumber = random.range(20, 80)
-          // let lastY = , lastX = 0;
-          path.forEach(([x, y]) => {
-            // context.arc(x, y, 40, 0);
-            context.bezierCurveTo(lastX, lastY + randomNumber, x, lastY - randomNumber * 0.5, x, y);
-            lastX = x;
-            lastY = y;
-          });
-          context.closePath();
+        context.beginPath();
+        let [lastX, lastY] = random.pick(path);
+        const randomNumber = random.range(20, 80);
+        // let lastY = , lastX = 0;
+        path.forEach(([x, y]) => {
+          // context.arc(x, y, 40, 0);
+          context.bezierCurveTo(
+            lastX,
+            lastY + randomNumber,
+            x,
+            lastY - randomNumber * 0.5,
+            x,
+            y,
+          );
+          lastX = x;
+          lastY = y;
+        });
+        context.closePath();
 
-          // Draw the trapezoid with a specific colour
-          // context.lineWidth = (window.width / 100) * 5 > 30 ? 30 : (window.width / 100) * 5;
-          context.lineWidth = 5;
-          context.globalAlpha = 0.85;
-          context.fillStyle = color;
-          context.fill();
+        // Draw the trapezoid with a specific colour
+        // context.lineWidth = (window.width / 100) * 5 > 30 ? 30 : (window.width / 100) * 5;
+        context.lineWidth = 5;
+        context.globalAlpha = 0.85;
+        context.fillStyle = color;
+        context.fill();
 
-          // Outline at full opacity
-          context.lineJoin = context.lineCap = 'round';
-          context.strokeStyle = background;
-          context.globalAlpha = 1;
-          context.stroke();
+        // Outline at full opacity
+        context.lineJoin = context.lineCap = 'round';
+        context.strokeStyle = background;
+        context.globalAlpha = 1;
+        context.stroke();
       });
     };
   };
@@ -125,16 +133,17 @@ const Canvas = () => {
   useEffect(() => {
     // const context = createContext();
     sketch({ width, height })();
-  })
+  });
 
   return (
-    <section id="canvas-container" css={css`
-      position: absolute;
-      z-index: -1;
-    `}>
-
-    </section>
-  )
-}
+    <section
+      id="canvas-container"
+      css={css`
+        position: absolute;
+        z-index: -1;
+      `}
+    ></section>
+  );
+};
 
 export default Canvas;

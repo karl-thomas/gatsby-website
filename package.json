@@ -23,6 +23,7 @@
     "gatsby-background-image": "^0.8.15",
     "gatsby-image": "^2.2.24",
     "gatsby-plugin-emotion": "^4.1.9",
+    "gatsby-plugin-layout": "^1.1.13",
     "gatsby-plugin-mdx": "^1.0.47",
     "gatsby-plugin-react-helmet": "^3.1.10",
     "gatsby-plugin-sharp": "^2.2.10",
@@ -38,7 +39,8 @@
     "prismjs": "^1.17.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-helmet": "^5.2.1"
+    "react-helmet": "^5.2.1",
+    "react-transition-group": "^4.3.0"
   },
   "devDependencies": {
     "cross-env": "^5.2.1",
