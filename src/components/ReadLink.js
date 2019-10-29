@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import { Link } from 'gatsby';
+import FadeLink from './FadeLink';
 
-const ReadLink = styled(Link)`
+const ReadLink = styled(FadeLink)`
   display: inline-block;
-  font-size: 0.875rem
+  font-size: 0.875rem;
 `;
 
-export default ReadLink
+export default ReadLink;

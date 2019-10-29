@@ -9,9 +9,9 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     {
-      resolve: `gatsby-plugin-layout`,
+      resolve: 'gatsby-plugin-transition-link',
       options: {
-        component: require.resolve('./src/components/layout'),
+        layout: require.resolve('./src/components/layout'),
       },
     },
     {

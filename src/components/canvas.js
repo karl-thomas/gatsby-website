@@ -5,8 +5,13 @@ const { lerp } = require('canvas-sketch-util/math');
 
 const Canvas = () => {
   const marginConst = 0.0;
-  const width = window.innerWidth;
-  const height = window.innerHeight * 0.4;
+  let width = '100px';
+  let height = '100px';
+
+  if (window) {
+    width = window.innerWidth;
+    height = window.innerHeight * 0.4;
+  }
 
   const sketch = ({ width, height }) => {
     // Padding around edges

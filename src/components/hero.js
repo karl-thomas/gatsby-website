@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Link, graphql, useStaticQuery } from 'gatsby';
 import Canvas from './Canvas';
 
 const CanvasBackground = styled.section`
@@ -12,24 +11,18 @@ const CanvasBackground = styled.section`
   }
 `;
 
-const Hero = () => {
-  const { image } = useStaticQuery(graphql`
-    query {
-      image: file(relativePath: { eq: "janko-ferlic-bear.jpg" }) {
-        sharp: childImageSharp {
-          fluid(traceSVG: { color: "#ddbbff66", background: "#fff" }) {
-            ...GatsbyImageSharpFluid_tracedSVG
-          }
-        }
-      }
-    }
-  `);
+class Hero extends React.Component {
+  shouldComponentUpdate() {
+    return false;
+  }
 
-  return (
-    <CanvasBackground>
-      <Canvas></Canvas>
-    </CanvasBackground>
-  );
-};
+  render() {
+    return (
+      <CanvasBackground>
+        <Canvas></Canvas>
+      </CanvasBackground>
+    );
+  }
+}
 
 export default Hero;

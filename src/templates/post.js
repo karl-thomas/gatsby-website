@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 import { css } from '@emotion/core';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import ReadLink from '../components/ReadLink';
+import FadeWrapper from '../components/FadeWrapper';
 
 export const query = graphql`
   query($slug: String!) {
@@ -17,7 +18,7 @@ export const query = graphql`
 `;
 
 const PostTemplate = ({ data: { mdx: post } }) => (
-  <>
+  <FadeWrapper className="stack">
     <h1>{post.frontmatter.title}</h1>
     <p
       css={css`
@@ -28,7 +29,7 @@ const PostTemplate = ({ data: { mdx: post } }) => (
     </p>
     <MDXRenderer>{post.body}</MDXRenderer>
     <ReadLink to="/"> &larr; back to all posts</ReadLink>
-  </>
+  </FadeWrapper>
 );
 
 export default PostTemplate;

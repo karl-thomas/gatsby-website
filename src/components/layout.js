@@ -24,26 +24,21 @@ const components = {
   wrapper: ({ children }) => <>{children}</>,
 };
 
-const Layout = ({ children, location }) => {
+const Layout = ({ children }) => {
   const { title, description } = useSiteMetadata();
 
   return (
     <>
       <Helmet>
         <link
-          href="https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister&display=swap"
+          href="https://fonts.googleapis.com/css?family=Rock+Salt&display=swap"
           rel="stylesheet"
         ></link>
         <html lang="en"></html>
         <title>{title}</title>
         <meta name="description" content={description}></meta>
       </Helmet>
-
-      <Router>
-        <Hero path="/"></Hero>
-      </Router>
       <Header />
-
       <main
         css={css`
           margin: 2rem auto 4rem;
