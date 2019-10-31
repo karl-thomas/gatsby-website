@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'gatsby-plugin-transition-link';
+import Link from '../components/FadeLink';
 import FadeWrapper from '../components/FadeWrapper';
 
 export default () => (
