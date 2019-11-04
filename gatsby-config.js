@@ -7,6 +7,7 @@ module.exports = {
     'gatsby-plugin-emotion',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
+    'gatsby-plugin-preact',
     'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-plugin-transition-link',
