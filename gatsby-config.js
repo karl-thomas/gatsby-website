@@ -8,6 +8,7 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
     'gatsby-plugin-preact',
+    'gatsby-plugin-postcss',
     'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-plugin-transition-link',

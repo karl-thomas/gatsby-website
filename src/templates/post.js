@@ -19,7 +19,7 @@ export const query = graphql`
 
 const PostTemplate = ({ data: { mdx: post } }) => (
   <FadeWrapper>
-    <article className="stack">
+    <article>
       <header>
         <h1>{post.frontmatter.title}</h1>
         <p
@@ -31,7 +31,9 @@ const PostTemplate = ({ data: { mdx: post } }) => (
         </p>
       </header>
 
-      <MDXRenderer>{post.body}</MDXRenderer>
+      <section className="stack">
+        <MDXRenderer>{post.body}</MDXRenderer>
+      </section>
     </article>
     <ReadLink to="/"> &larr; back to all posts</ReadLink>
   </FadeWrapper>
