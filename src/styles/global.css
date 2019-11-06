@@ -39,11 +39,18 @@ body > div {
 }
 
 h1,
+.hdg-1,
 h2,
+.hdg-2,
 h3,
+.hdg-3,
 h4,
+.hdg-4,
 h5,
-h6 {
+.hdg-5,
+h6,
+.hdg-6 {
+  font-family: 'Livvic', sans-serif;
   color: #222;
   line-height: 1.1;
   -webkit-font-smoothing: antialiased;
@@ -128,4 +135,8 @@ small,
   :root {
     --base-size: 1rem;
   }
+}
+
+.livvic {
+  font-family: 'Livvic', sans-serif;
 }

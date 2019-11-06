@@ -14,6 +14,10 @@ const Layout = ({ children }) => {
           href="https://fonts.googleapis.com/css?family=Rock+Salt&display=swap"
           rel="stylesheet"
         ></link>
+        <link
+          href="https://fonts.googleapis.com/css?family=Livvic:300,400,500,600,700&display=swap"
+          rel="stylesheet"
+        ></link>
         <html lang="en"></html>
         <title>{title}</title>
         <meta name="description" content={description}></meta>

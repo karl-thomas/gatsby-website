@@ -18,16 +18,21 @@ export const query = graphql`
 `;
 
 const PostTemplate = ({ data: { mdx: post } }) => (
-  <FadeWrapper className="stack">
-    <h1>{post.frontmatter.title}</h1>
-    <p
-      css={css`
-        font-size: 0.75rem;
-      `}
-    >
-      Posted by {post.frontmatter.author}
-    </p>
-    <MDXRenderer>{post.body}</MDXRenderer>
+  <FadeWrapper>
+    <article className="stack">
+      <header>
+        <h1>{post.frontmatter.title}</h1>
+        <p
+          css={css`
+            font-size: 0.75rem;
+          `}
+        >
+          Posted by {post.frontmatter.author}
+        </p>
+      </header>
+
+      <MDXRenderer>{post.body}</MDXRenderer>
+    </article>
     <ReadLink to="/"> &larr; back to all posts</ReadLink>
   </FadeWrapper>
 );
