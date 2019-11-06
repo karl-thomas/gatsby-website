@@ -1,0 +1,14 @@
+@import './settings.css';
+@import './generics.css';
+@import './elements.css';
+@import './helpers.css';
+
+body > div {
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --base-size: 1rem;
+  }
+}

@@ -3,6 +3,7 @@ import Insta from '../components/Insta';
 import usePosts from '../hooks/use-posts';
 import PostPreview from '../components/PostPreview';
 import FadeWrapper from '../components/FadeWrapper';
+import '../styles/index.css';
 
 export default () => {
   const posts = usePosts();

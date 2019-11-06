@@ -1,0 +1,66 @@
+.hdg-1,
+.hdg-2,
+.hdg-3,
+.hdg-4,
+.hdg-5,
+.hdg-6 {
+  font-family: 'Livvic', sans-serif;
+  color: #222;
+  line-height: 1.1;
+  -webkit-font-smoothing: antialiased;
+}
+
+.rock-salt {
+  font-family: 'Rock Salt';
+}
+
+/* Stacks  */
+.stack {
+  --stack-space: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.stack:only-child {
+  height: 100%;
+}
+.stack > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.stack > * + * {
+  margin-top: var(--stack-space);
+}
+
+/* Implement Type Scale */
+
+.hdg-1 {
+  margin-top: 0;
+  font-size: var(--h1);
+}
+
+.hdg-2 {
+  font-size: var(--h2);
+}
+
+.hdg-3 {
+  font-size: var(--h3);
+}
+
+.hdg-4 {
+  font-size: var(--h4);
+}
+
+.hdg-5 {
+  font-size: var(--h5);
+}
+
+.text_small {
+  font-size: calc(var(--base-size) / var(--type-scale));
+}
+
+.livvic {
+  font-family: 'Livvic', sans-serif;
+}
