@@ -9,11 +9,16 @@
   --color-silver: #e9f1f7;
 
   /* Type scale */
-  --base-size: 1.25rem;
-  --type-scale: 1.25;
-  --h5: calc(var(--base-size) * var(--type-scale));
-  --h4: calc(var(--h5) * var(--type-scale));
-  --h3: calc(var(--h4) * var(--type-scale));
-  --h2: calc(var(--h3) * var(--type-scale));
-  --h1: calc(var(--h2) * var(--type-scale));
+  --scale: 1.25;
+  --s-5: calc(var(--s-4) / var(--scale));
+  --s-4: calc(var(--s-3) / var(--scale));
+  --s-3: calc(var(--s-2) / var(--scale));
+  --s-2: calc(var(--s-1) / var(--scale));
+  --s-1: calc(var(--s0) / var(--scale));
+  --s0: 1rem;
+  --s1: calc(var(--s0) * var(--scale));
+  --s2: calc(var(--s1) * var(--scale));
+  --s3: calc(var(--s2) * var(--scale));
+  --s4: calc(var(--s3) * var(--scale));
+  --s5: calc(var(--s4) * var(--scale));
 }

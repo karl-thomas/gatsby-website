@@ -8,7 +8,12 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
     'gatsby-plugin-preact',
-    'gatsby-plugin-postcss',
+    {
+      resolve: 'gatsby-plugin-postcss',
+      options: {
+        postCssPlugins: [],
+      },
+    },
     'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-plugin-transition-link',
@@ -65,13 +70,5 @@ module.exports = {
         analyzerMode: 'static',
       },
     },
-    // {
-    //   resolve: `gatsby-transformer-remark`,
-    //   options: {
-    //     plugins: [
-    //       `gatsby-remark-prismjs`
-    //     ],
-    //   },
-    // },
   ],
 };

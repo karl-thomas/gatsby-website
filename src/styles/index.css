@@ -6,9 +6,3 @@
 body > div {
   margin-top: 0;
 }
-
-@media (max-width: 768px) {
-  :root {
-    --base-size: 1rem;
-  }
-}
