@@ -1,0 +1,24 @@
+:root {
+  /* Color */
+  --color-primary: #8869f7;
+  --color-primary-rgb: 136, 105, 247;
+  --color-secondary: #eaba8a;
+  --color-tertiary: #84bc92;
+  --color-dark: #191011;
+  --color-light: #faf9fc;
+  --color-silver: #e9f1f7;
+
+  /* Type scale */
+  --scale: 1.25;
+  --s-5: calc(var(--s-4) / var(--scale));
+  --s-4: calc(var(--s-3) / var(--scale));
+  --s-3: calc(var(--s-2) / var(--scale));
+  --s-2: calc(var(--s-1) / var(--scale));
+  --s-1: calc(var(--s0) / var(--scale));
+  --s0: 1rem;
+  --s1: calc(var(--s0) * var(--scale));
+  --s2: calc(var(--s1) * var(--scale));
+  --s3: calc(var(--s2) * var(--scale));
+  --s4: calc(var(--s3) * var(--scale));
+  --s5: calc(var(--s4) * var(--scale));
+}

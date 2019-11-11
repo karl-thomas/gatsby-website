@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
-import { Link } from 'gatsby';
+import FadeLink from './FadeLink';
 
-const NavLink = styled(Link)`
-  color: #222;
+const NavLink = styled(FadeLink)`
+  color: var(--color-dark);
   font-size: 1rem;
   font-weight: ${props => props.fontWeight || 'normal'};
   line-height: 1;
@@ -21,29 +20,39 @@ const NavLink = styled(Link)`
   }
 `;
 
-const Header = () => (
-  <header
-    css={css`
-      background: #eee;
-      border-bottom: 1px solid #ddd;
-      display: flex;
-      justify-content: space-between;
-      padding: 0.25rem calc((100vw - 550px - 0.5rem) / 2);
-    `}
-    >
-    <NavLink to="/" fontWeight="bold">
-      Starter Blohg
-    </NavLink>
+const SiteTitle = styled(FadeLink)`
+  font-size: var(--h5);
+  font-family: 'Rock Salt', cursive;
+  display: inherit;
+  color: #222;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+`;
 
-    <nav css={css` margin-top: 0; `}>
-      <NavLink to="/" activeClassName="current-page">
+const MainHeader = styled.header`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 0.5rem 1rem;
+  border-bottom: 15px var(--color-primary) solid;
+  transition: background-color 1s ease-in;
+  height: 10vh;
+`;
+
+const Header = () => (
+  <MainHeader>
+    <SiteTitle to="/">A Pile of Bears</SiteTitle>
+
+    <nav>
+      <NavLink direction="left" to="/" activeClassName="current-page">
         Home
       </NavLink>
-      <NavLink to="/about/" activeClassName="current-page">
+      <NavLink direction="left" to="/about/" activeClassName="current-page">
         about
       </NavLink>
     </nav>
-  </header>
-)
+  </MainHeader>
+);
 
 export default Header;

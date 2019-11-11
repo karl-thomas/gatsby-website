@@ -1,20 +1,43 @@
 module.exports = {
   siteMetadata: {
-    title: 'Starting Blog',
-    description: 'a nice blog to start with',
+    title: 'A Pile of bears',
+    description: "Karl Thomas' online precense",
   },
   plugins: [
     'gatsby-plugin-emotion',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
+    'gatsby-plugin-preact',
+    {
+      resolve: 'gatsby-plugin-postcss',
+      options: {
+        postCssPlugins: [],
+      },
+    },
     'gatsby-transformer-sharp',
+    {
+      resolve: 'gatsby-plugin-transition-link',
+      options: {
+        layout: require.resolve('./src/components/layout'),
+      },
+    },
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
-        defaultLayouts: {
-          default: require.resolve('./src/components/layout'),
-        },
-        gatsbyRemarkPlugins: [{ resolve: 'gatsby-remark-images' }],
+        extensions: ['.mdx', '.md'],
+        gatsbyRemarkPlugins: [
+          { resolve: 'gatsby-remark-images' },
+          {
+            resolve: 'gatsby-remark-prismjs',
+            options: {
+              classPrefix: 'language-',
+              inlineCodeMarker: {
+                tsx: 'tsx',
+              },
+              aliases: {},
+            },
+          },
+        ],
         plugins: [{ resolve: 'gatsby-remark-images' }],
       },
     },
@@ -35,7 +58,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-instagram',
       options: {
-        username: 'gatsbyjs',
+        username: 'karl_thomas_',
       },
     },
     {

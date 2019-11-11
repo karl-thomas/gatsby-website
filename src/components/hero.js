@@ -1,68 +1,28 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import BackgroundImage from 'gatsby-background-image';
-import { Link, graphql, useStaticQuery } from 'gatsby';
+import Canvas from './Canvas';
 
-const ImageBackground = styled(BackgroundImage)`
-  background-image: url('/images/janko-ferlic-bear.jpg');
-  background-position: top 20% center;
-  background-size: cover;
+const CanvasBackground = styled.section`
   height: 40vh;
+  background: linear-gradient(to top, #ffffff 1rem, transparent);
 
   + * {
     margin-top: 0;
   }
 `;
 
-const TextBox = styled('div')`
-  background-image: linear-gradient(to top, #ddbbffdd 2rem, #ddbbff00);
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  margin-top: 0;
-  justify-content: flex-end;
-  padding: 0 calc((100vw - 550px) / 2) 2rem;
-  width: 100%;
-
-  h1 {
-    text-shadow: 1px 1px 3px #eeddff66;
-    font-size: 2.25rem;
+class Hero extends React.Component {
+  shouldComponentUpdate() {
+    return false;
   }
 
-  p,
-  a {
-    color: #222;
-    margin: 0;
+  render() {
+    return (
+      <CanvasBackground>
+        <Canvas></Canvas>
+      </CanvasBackground>
+    );
   }
-
-  a {
-    margin-top: 0.5rem;
-  }
-`
-
-const Hero = () => {
-  const { image } = useStaticQuery(graphql`
-    query {
-      image: file(relativePath: { eq: "janko-ferlic-bear.jpg"}) {
-        sharp: childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-    }
-  `);
-
-  return (
-    <ImageBackground Tag="section" fluid={image.sharp.fluid} fadeIn="soft">
-      <TextBox>
-        <h1>A Pile of Bears &hearts;</h1>
-        <p>
-          hello worl <Link to="/about/">Learn about me &rarr;</Link>
-        </p>
-      </TextBox>
-    </ImageBackground>
-  )
 }
 
 export default Hero;

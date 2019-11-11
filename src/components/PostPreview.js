@@ -1,8 +1,8 @@
 import React from 'react';
 import { css } from '@emotion/core';
-import { Link } from 'gatsby';
-import ReadLink from './read-link';
+import ReadLink from './ReadLink';
 import Image from 'gatsby-image';
+import FadeLink from './FadeLink';
 
 const PostPreview = ({ post }) => (
   <article
@@ -17,8 +17,8 @@ const PostPreview = ({ post }) => (
       }
     `}
   >
-    <Link
-      to={post.slug}
+    <FadeLink
+      to={`/posts/${post.slug}`}
       css={css`
         margin: 1rem 1rem 0 0;
         width: 100px;
@@ -31,15 +31,13 @@ const PostPreview = ({ post }) => (
             margin-top: 0;
           }
         `}
-        alt={post.title} //this is bad dont do this
+        alt={post.title} // this is bad dont do this
       />
-    </Link>
+    </FadeLink>
     <div>
-      <h3>
-        <Link to={post.slug}>{post.title}</Link>
-      </h3>
-      <p>{post.excerpt}</p>Î
-      <ReadLink to={post.slug}>read this post &rarr;</ReadLink>
+      <h3>{post.title}</h3>
+      <p>{post.excerpt}</p>
+      <ReadLink to={`/posts/${post.slug}`}>read this post &rarr;</ReadLink>
     </div>
   </article>
 );
